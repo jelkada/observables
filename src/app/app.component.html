@@ -1,0 +1,87 @@
+
+
+<div class="container my-5">
+
+  <div class="row no-gutters">
+    <div class="col-xs-12">
+      <h3>Observables (<a href="observables-ex.zip">download example</a>)</h3>
+      <ul>
+        <li>This example has 2 observables in home.component.ts - myNumbers and myObservable.</li>
+        <li>(1) myNumbers - created using the interval() method.</li>
+        <li>(2) myObservable - created using the create() method. </li>
+        <li>myObservable shows the 3 ways to handle data (valid data, error and completed).</li>
+        <li>The observers are created using the subscribe() method and are assigned to a Subscription object.</li>
+        <li>The Subscription objects are used in the ngOnDestroy() to allow the observers to unsubscribe() from the observables.</li>
+        <li>The example has a Subject which is declared in the users.service.ts - userActivatedSubject to get the URL id.</li>
+        <li>When the button is clicked, onActivate() is triggered and the next() function of the Subject is called in order to emit the URL id param.</li>
+        <li>The userActivatedSubject is an observable using next() to emit data (param id).</li>
+        <li>The userActivatedSubject is an observer using subscribe() to update user1Activated and user2Activated.</li>
+        <li>Subjects are observable and observers at the same time.</li>
+        <li>The route.params is also an observable which notifies the subscribe() observer when the URL param id changes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr />
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <a routerLink="/" class="pr-3">Home</a>
+        <a [routerLink]="['user', 1]" class="pr-3">User 1 {{ user1Activated ? '(activated)' : '' }}</a>
+        <a [routerLink]="['user', 2]">User 2 {{ user2Activated ? '(activated)' : '' }}</a>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  <hr class="mt-5"/>
+
+  <div class="row no-gutters">
+    <div class="col-xs-12 ng-non-bindable">
+      <h4 class="mt-3">Observables highlights:</h4>
+      <ul>
+        <li>Observables are data sources with an open and continuous channel of communication where multiple values are emitted over time.</li>
+        <li>Observable is like an array whose items arrive asynchronously over time.</li>
+        <li>Observers subscribe to Observable and acts on the emitted data of observable.</li>
+        <li>Observables help you manage asynchronous data, such as external data coming from a backend service.</li>
+        <li>They overcome the challenge that JavaScript by design is single-threaded which makes handling asynchronous data complicated.</li>
+        <li>JavaScript uses Event Loop to manage asynchronous functions which is neither scalable, robust nor maintainable.</li>
+        <li>The use of JS callbacks offer asynchronous behaviour, but callbacks are less scalable and often become overly nested.</li>
+        <li>Observables then JavaScript as a language integrate the observer design pattern.</li>
+        <li>Angular relies heavily on Observables for its asynchronous operations, as it has moved on from promises due to their limitations.</li>
+        <li>Observables are a new way of pushing data in JavaScript. An observable is a Producer of multiple values, “pushing” them to subscribers.</li>
+        <li>To use observables, Angular uses a third-party library called Reactive Extensions (RxJS).</li>
+        <li>If you subscribe manually to an observable, you need to dispose of them by manually unsubscribing, to avoid any memory leaks.</li>
+        <li>In the spec for ES7 the plan is to include support for observables out of the box.</li>
+        <li>Unlike Promises, Observables return more than one value and they are cancellable by unsubscribing.</li>
+        <li>With Promises, you generally don’t have access to prevent the Promise resolution from executing.</li>
+        <li>Using the dollar sign in the name of an Observable variable is a practice to identify an observable.</li>
+        <li>Angular core features such as the Router module, Http module and other modules use Observables.</li>
+        <li>Observables are compositional - allow to use combinators in order to filter or map for example.</li>
+        <li>Observables are lazy - they only start working when an Observer starts listening.</li>
+        <li>Subjects themselves are both observables and observers.</li>
+      </ul>
+      <h4 class="mt-3">Usage guidelines:</h4>
+      <ul>
+        <li>Import Observable, Observer and Subscription from the rxjs library (syntax depends on using the “rxjs-compat” package).</li>
+        <li>Create the Observable object and set the data handling options using next() for normal/valid data, error data and completed.</li>
+        <li>Create the Observer object using the subscribe() method and assign to a Subscription object that is needed in ngOnDestroy().</li>
+        <li>Define in the subscribe() method how data should be handled in the 3 cases of data, error and complete.</li>
+        <li>Unsubscribe all Observers from the Observable in ngOnDestroy() using Subscription.unsubscribe() method.</li>
+        <li>Use Subject instead of EventEmitter to handle events - import &#123; Subject &#123; from 'rxjs/Subject';</li>
+        <li>The Subject object will act as both the Observable and the Observer.</li>
+        <li>As an observable use the Subject’s next() method to emit data.</li>
+        <li>As an observer use the Subject’s subscribe() method to handle data (in anonymous function).</li>
+        <li>Use the built in params observable of the Router module to get the id parameter of the user component.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
